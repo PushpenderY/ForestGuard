@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, Flame, Menu, X } from "lucide-react";
+import { ArrowDown, Flame, Menu, X, Heart, Trees } from "lucide-react";
 import { useState } from "react";
 
 const navItems = [
@@ -29,7 +29,7 @@ export default function Navbar() {
           className="flex items-center gap-2"
         >
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500">
-            <Flame size={20} className="text-black" />
+            <Trees size={20} className="text-black"></Trees>
           </div>
 
           <div>
@@ -63,6 +63,14 @@ export default function Navbar() {
           Predict Risk
           <ArrowDown size={15} />
         </a>
+        <a href="/donate"
+        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-emerald-400/60 bg-emerald-400/10 px-4 py-2 text-sm font-semibold text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.25)] transition-all duration-300 hover:scale-105 hover:bg-emerald-400 hover:text-black hover:shadow-[0_0_30px_rgba(52,211,153,0.65)]">
+        <span className="absolute inset-0 animate-pulse rounded-full bg-emerald-400/10"></span>
+        <Heart size={16} className="relative z-10 animate-pulse fill-emerald-400 text-emerald-400 group-hover:fill-black group-hover:text-black"></Heart>
+        <span className="relative z-10">Donate</span>
+        <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
+      
+      </a>
 
         {/* Mobile button */}
         <button
@@ -73,6 +81,8 @@ export default function Navbar() {
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
+
+      
 
       {/* Mobile Navigation */}
       {menuOpen && (

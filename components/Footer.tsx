@@ -30,7 +30,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden border-t border-white/10 bg-[#040d08]">
 
       {/* Background glow */}
-      <div className="pointer-events-none absolute left-1/2 top-[-200px] h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-emerald-500/5 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 -top-50 h-100 w-150 -translate-x-1/2 rounded-full bg-emerald-500/5 blur-[120px]" />
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-10">
 
@@ -69,8 +69,12 @@ export default function Footer() {
             </p>
 
             <div className="mt-7 flex items-center gap-3 text-sm text-white/40">
+            <a href="mailto:pushpender200406@gmail.com"
+            className="mt-7 flex items-center gap-2 text-sm text-white/40 transition hover:text-emerald-400">
               <Mail size={16} className="text-emerald-400" />
               <span>Connect with Pushpender</span>
+            </a>
+              
             </div>
 
           </div>
@@ -103,7 +107,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/60 transition hover:border-emerald-400/20 hover:bg-emerald-400/5 hover:text-white"
+                    className="group flex items-center gap-2 rounded-xl border border-white/10 bg-white/3 px-4 py-3 text-sm text-white/60 transition hover:border-emerald-400/20 hover:bg-emerald-400/5 hover:text-white"
                   >
                     <Icon
                       size={16}
