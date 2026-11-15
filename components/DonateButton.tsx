@@ -16,6 +16,8 @@ export default function DonateButton() {
 
     if (savedDonation) {
       try {
+        // Restore the persisted donation badge after hydration.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setDonation(JSON.parse(savedDonation));
       } catch {
         localStorage.removeItem("forestguard_donation");

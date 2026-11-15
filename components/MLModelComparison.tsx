@@ -28,7 +28,7 @@ const MODEL_LABELS: Record<string, string> = {
   logistic_regression: "Logistic Regression",
 };
 
-const API_URL = process.env.NEXT_PUBLIC_ML_API_URL || "http://localhost:8000";
+const API_URL = (process.env.NEXT_PUBLIC_ML_API_URL || "http://localhost:8000").replace(/\/$/, "");
 
 export default function MLModelComparison(props: Props) {
   const [results, setResults] = useState<Record<string, ModelResult> | null>(null);

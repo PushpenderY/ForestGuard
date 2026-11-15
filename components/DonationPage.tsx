@@ -9,6 +9,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
+import Link from "next/link";
 
 import { QRCodeSVG } from "qrcode.react";
 import { useRouter } from "next/navigation";
@@ -105,13 +106,13 @@ export default function DonationPage() {
       <header className="relative z-10 border-b border-white/10">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-10">
 
-          <a
+          <Link
             href="/"
             className="flex items-center gap-2 text-sm text-white/60 transition hover:text-white"
           >
             <ArrowLeft size={18} />
             Back to ForestGuard
-          </a>
+          </Link>
 
           <div className="flex items-center gap-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-400">

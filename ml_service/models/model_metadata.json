@@ -1,0 +1,18 @@
+{
+    "feature_columns": [
+        "latitude",
+        "longitude",
+        "temperature_c",
+        "relative_humidity_pct",
+        "wind_speed_kmh",
+        "rainfall_mm",
+        "drought_index",
+        "vegetation_moisture_pct",
+        "month",
+        "day_of_year"
+    ],
+    "target_column": "fire_occurred",
+    "selected_model": "logistic_regression",
+    "selected_threshold": 0.7,
+    "dataset_name": "forest_fire_environmental_dataset_clean.csv"
+}

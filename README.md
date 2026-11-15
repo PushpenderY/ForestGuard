@@ -48,11 +48,11 @@ ForestGuard keeps its original JavaScript rule-based risk score and adds a separ
 The same environmental input is sent to all three models through a FastAPI service. Each model returns its own Fire/No Fire classification, estimated fire probability and risk band. The original JavaScript prediction remains available separately.
 
 ### Run the ML service locally
-1. Download the cleaned dataset from the ForestGuard ML starter bundle and place it at `ml-service/data/forest_fire_environmental_dataset_clean.csv`.
-2. Follow the setup instructions in [ml-service/README.md](ml-service/README.md).
-3. Start the FastAPI server on port 8000.
+1. The trained model artifacts are in `ml_service/models/`; the training dataset is only needed if you intend to retrain them.
+2. Follow the setup instructions in [ml_service/README.md](ml_service/README.md).
+3. Start the FastAPI server on port 8000 with `uvicorn ml_service.api:app --host 0.0.0.0 --port 8000`.
 4. Start the Next.js app with `npm run dev`.
-5. In the Fire Risk Predictor, enter environmental conditions and select **Run all ML models**.
+5. Set `NEXT_PUBLIC_ML_API_URL` to the hosted API URL for deployment. In local development it defaults to `http://localhost:8000`.
 
 ### Dataset and model limitations
 The supplied dataset is synthetic and imbalanced. The ML predictions are an educational demonstration and must not be used as real-world wildfire warnings. The probability outputs are uncalibrated model estimates; real deployment would require validated historical fire observations, geographically and temporally independent testing, probability calibration and operational monitoring.

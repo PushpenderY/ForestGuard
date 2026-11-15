@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, Flame, Menu, X, Heart, Trees } from "lucide-react";
+import { ArrowDown, Menu, X, Heart, Trees } from "lucide-react";
 import { useState } from "react";
 
 const navItems = [
