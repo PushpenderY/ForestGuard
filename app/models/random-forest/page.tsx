@@ -93,7 +93,7 @@ interface Environment {
   day: string | null;
 }
 
-const API_URL = (process.env.NEXT_PUBLIC_ML_API_URL || "http://localhost:8000").replace(/\/$/, "");
+const API_URL = (process.env.NEXT_PUBLIC_ML_API_URL || (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "")).replace(/\/$/, "");
 
 const MONTHS = [
   "January", "February", "March", "April",

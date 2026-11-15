@@ -89,7 +89,7 @@ type AnalysisData = {
   };
 };
 
-const API_URL = (process.env.NEXT_PUBLIC_ML_API_URL || "http://localhost:8000").replace(/\/$/, "");
+const API_URL = (process.env.NEXT_PUBLIC_ML_API_URL || (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "")).replace(/\/$/, "");
 
 const COLORS = {
   green: "#34d399",

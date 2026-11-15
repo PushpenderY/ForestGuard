@@ -48,7 +48,10 @@ type ApiResponse = {
   };
 };
 
-const ML_API_URL = (process.env.NEXT_PUBLIC_ML_API_URL || "http://localhost:8000").replace(/\/$/, "");
+const ML_API_URL = (
+  process.env.NEXT_PUBLIC_ML_API_URL ||
+  (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "")
+).replace(/\/$/, "");
 
 type RuleResult = {
   score: number;
@@ -248,6 +251,12 @@ export default function RiskPredictor() {
     setModelLinks({});
 
     try {
+      if (!ML_API_URL) {
+        throw new Error(
+          "The ML API URL is not configured for this deployment. Set NEXT_PUBLIC_ML_API_URL to the public HTTPS URL of the ForestGuard Python API, then redeploy the website."
+        );
+      }
+
       const dayOfYear = getDayOfYear(
         formData.month,
         formData.day
@@ -282,8 +291,9 @@ export default function RiskPredictor() {
       );
 
       if (!response.ok) {
+        const body = await response.json().catch(() => null);
         throw new Error(
-          `Prediction API failed: ${response.status}`
+          body?.detail || `Prediction API failed: ${response.status}`
         );
       }
 
@@ -341,7 +351,9 @@ export default function RiskPredictor() {
       console.error(err);
 
       setError(
-        "Unable to generate predictions. Please check whether the Python ML API is running."
+        err instanceof Error
+          ? `${err.message} Check that the ML API is deployed and reachable from this phone.`
+          : "Unable to reach the ForestGuard ML API. Check its public URL and deployment status."
       );
     } finally {
       setLoading(false);

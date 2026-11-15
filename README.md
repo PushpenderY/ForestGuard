@@ -54,5 +54,9 @@ The same environmental input is sent to all three models through a FastAPI servi
 4. Start the Next.js app with `npm run dev`.
 5. Set `NEXT_PUBLIC_ML_API_URL` to the hosted API URL for deployment. In local development it defaults to `http://localhost:8000`.
 
+### Deploying the ML API for phones
+
+The phone cannot reach an API running at `localhost` on your computer. Deploy `ml_service/` as a public Python web service, start it with `uvicorn ml_service.api:app --host 0.0.0.0 --port $PORT` (or the host's equivalent port variable), then set `NEXT_PUBLIC_ML_API_URL` in the website host to that service's HTTPS URL and rebuild/redeploy the website. Verify the API by opening its `/health` URL on the phone. The API defaults to allowing browser requests from any origin; set `FORESTGUARD_CORS_ORIGINS` to a comma-separated allowlist if you want to restrict it.
+
 ### Dataset and model limitations
 The supplied dataset is synthetic and imbalanced. The ML predictions are an educational demonstration and must not be used as real-world wildfire warnings. The probability outputs are uncalibrated model estimates; real deployment would require validated historical fire observations, geographically and temporally independent testing, probability calibration and operational monitoring.

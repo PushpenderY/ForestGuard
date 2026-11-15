@@ -28,7 +28,10 @@ const MODEL_LABELS: Record<string, string> = {
   logistic_regression: "Logistic Regression",
 };
 
-const API_URL = (process.env.NEXT_PUBLIC_ML_API_URL || "http://localhost:8000").replace(/\/$/, "");
+const API_URL = (
+  process.env.NEXT_PUBLIC_ML_API_URL ||
+  (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "")
+).replace(/\/$/, "");
 
 export default function MLModelComparison(props: Props) {
   const [results, setResults] = useState<Record<string, ModelResult> | null>(null);
@@ -39,6 +42,11 @@ export default function MLModelComparison(props: Props) {
     setLoading(true);
     setError("");
     try {
+      if (!API_URL) {
+        throw new Error(
+          "The ML API URL is not configured. Set NEXT_PUBLIC_ML_API_URL to the public API URL and redeploy."
+        );
+      }
       const monthNumber = new Date(`${props.month} 1, 2025`).getMonth() + 1;
       const date = new Date(2025, monthNumber - 1, props.day);
       const dayOfYear = Math.floor(
