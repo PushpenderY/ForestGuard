@@ -13,7 +13,7 @@ pip install -r ml_service/requirements.txt
 uvicorn ml_service.api:app --host 0.0.0.0 --port 8000
 ```
 
-For a deployed website or phone, deploy this service on a Python host and set `NEXT_PUBLIC_ML_API_URL` in the frontend host to this service's public HTTPS URL (for example, `https://forestguard-api.example.com`). Rebuild/redeploy the frontend after setting it because Next.js embeds public environment variables at build time. The API accepts requests from all browser origins by default; set `FORESTGUARD_CORS_ORIGINS` to a comma-separated allowlist to restrict access.
+For the Vercel deployment, the root `api/index.py` exposes this FastAPI app at `/api/*` on the same HTTPS domain as the Next.js website. No CORS or public API URL setting is needed. Production frontend requests always use this same-origin path. Check `/api/health` after deployment.
 
 The `/health` route reports service status, `/models/status` reports loaded models, and `/docs` provides the interactive API documentation.
 

@@ -102,6 +102,7 @@ class EnvironmentalData(BaseModel):
 # ==========================================
 
 @app.get("/")
+@app.get("/api")
 def home():
 
     return {
@@ -111,6 +112,7 @@ def home():
 
 
 @app.get("/health")
+@app.get("/api/health")
 def health():
     return {"status": "ok", "models_loaded": True}
 
@@ -120,6 +122,7 @@ def health():
 # ==========================================
 
 @app.get("/models/status")
+@app.get("/api/models/status")
 def model_status():
 
     return {
@@ -134,6 +137,7 @@ def model_status():
 # ==========================================
 
 @app.post("/predict")
+@app.post("/api/predict")
 def predict_fire(data: EnvironmentalData):
 
     # Convert incoming input into dictionary
@@ -198,6 +202,7 @@ def predict_fire(data: EnvironmentalData):
 # ==========================================
 
 @app.get("/models/decision-tree/analysis")
+@app.get("/api/models/decision-tree/analysis")
 def decision_tree_analysis():
 
     # Check whether analysis file exists
@@ -218,6 +223,7 @@ def decision_tree_analysis():
 
 
 @app.get("/models/random-forest/analysis")
+@app.get("/api/models/random-forest/analysis")
 def random_forest_analysis():
     analysis_path = MODEL_DIR / "random_forest_analysis.json"
 
@@ -238,6 +244,7 @@ def random_forest_analysis():
 
 
 @app.get("/models/logistic-regression/analysis")
+@app.get("/api/models/logistic-regression/analysis")
 def logistic_regression_analysis():
 
     analysis_path = MODEL_DIR / "logistic_regression_analysis.json"

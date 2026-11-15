@@ -52,11 +52,11 @@ The same environmental input is sent to all three models through a FastAPI servi
 2. Follow the setup instructions in [ml_service/README.md](ml_service/README.md).
 3. Start the FastAPI server on port 8000 with `uvicorn ml_service.api:app --host 0.0.0.0 --port 8000`.
 4. Start the Next.js app with `npm run dev`.
-5. Set `NEXT_PUBLIC_ML_API_URL` to the hosted API URL for deployment. In local development it defaults to `http://localhost:8000`.
+5. On Vercel, the API is deployed on the same domain at `/api/*`; no API URL setting is required. Local development defaults to `http://localhost:8000`.
 
 ### Deploying the ML API for phones
 
-The phone cannot reach an API running at `localhost` on your computer. Deploy `ml_service/` as a public Python web service, start it with `uvicorn ml_service.api:app --host 0.0.0.0 --port $PORT` (or the host's equivalent port variable), then set `NEXT_PUBLIC_ML_API_URL` in the website host to that service's HTTPS URL and rebuild/redeploy the website. Verify the API by opening its `/health` URL on the phone. The API defaults to allowing browser requests from any origin; set `FORESTGUARD_CORS_ORIGINS` to a comma-separated allowlist if you want to restrict it.
+The Python API is exposed as a Vercel Function from `api/index.py`, so both the site and phone use the same HTTPS origin. Production always calls `/api/*`, so any stale `NEXT_PUBLIC_ML_API_URL` configured in Vercel cannot redirect mobile traffic back to localhost. After pushing, verify `https://forest-guard-phi.vercel.app/api/health` and wait for the Vercel deployment to finish.
 
 ### Dataset and model limitations
 The supplied dataset is synthetic and imbalanced. The ML predictions are an educational demonstration and must not be used as real-world wildfire warnings. The probability outputs are uncalibrated model estimates; real deployment would require validated historical fire observations, geographically and temporally independent testing, probability calibration and operational monitoring.

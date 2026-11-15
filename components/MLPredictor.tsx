@@ -21,8 +21,9 @@ interface APIResponse {
 }
 
 const ML_API_URL = (
-  process.env.NEXT_PUBLIC_ML_API_URL ||
-  (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "")
+  process.env.NODE_ENV === "development"
+    ? process.env.NEXT_PUBLIC_ML_API_URL || "http://localhost:8000"
+    : "/api"
 ).replace(/\/$/, "");
 
 function ModelCard({ title, data }: { title: string; data: PredictionResult }) {
@@ -87,11 +88,6 @@ export default function MLPredictor() {
     setResult(null);
 
     try {
-      if (!ML_API_URL) {
-        throw new Error(
-          "The ML API URL is not configured. Set NEXT_PUBLIC_ML_API_URL to the public API URL and redeploy."
-        );
-      }
 
       const response = await fetch(
         `${ML_API_URL}/predict`,
