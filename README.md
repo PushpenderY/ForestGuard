@@ -34,3 +34,25 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Multi-Model Forest Fire Prediction
+
+ForestGuard keeps its original JavaScript rule-based risk score and adds a separate machine-learning comparison module.
+
+### ML models
+- Decision Tree
+- Random Forest
+- Logistic Regression
+
+The same environmental input is sent to all three models through a FastAPI service. Each model returns its own Fire/No Fire classification, estimated fire probability and risk band. The original JavaScript prediction remains available separately.
+
+### Run the ML service locally
+1. Download the cleaned dataset from the ForestGuard ML starter bundle and place it at `ml-service/data/forest_fire_environmental_dataset_clean.csv`.
+2. Follow the setup instructions in [ml-service/README.md](ml-service/README.md).
+3. Start the FastAPI server on port 8000.
+4. Start the Next.js app with `npm run dev`.
+5. In the Fire Risk Predictor, enter environmental conditions and select **Run all ML models**.
+
+### Dataset and model limitations
+The supplied dataset is synthetic and imbalanced. The ML predictions are an educational demonstration and must not be used as real-world wildfire warnings. The probability outputs are uncalibrated model estimates; real deployment would require validated historical fire observations, geographically and temporally independent testing, probability calibration and operational monitoring.
