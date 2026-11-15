@@ -1,0 +1,1 @@
+Place forest_fire_environmental_dataset_clean.csv in this directory. Use the cleaned CSV supplied in the ForestGuard ML starter ZIP. Do not use uncleaned data for the training command.
