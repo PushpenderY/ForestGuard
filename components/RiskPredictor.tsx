@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { useState } from "react";
+import MLModelComparison from "./MLModelComparison";
 
 type RiskLevel = "LOW" | "MODERATE" | "HIGH" | "EXTREME";
 
@@ -22,6 +23,9 @@ export default function RiskPredictor() {
   const [windSpeed, setWindSpeed] = useState(18);
   const [rainfall, setRainfall] = useState(5);
   const [dryness, setDryness] = useState(65);
+  const [latitude, setLatitude] = useState(21.57);
+  const [longitude, setLongitude] = useState(80.43);
+  const [vegetationMoisture, setVegetationMoisture] = useState(45);
 
   const [month, setMonth] = useState("May");
   const [day, setDay] = useState(18);
@@ -354,6 +358,37 @@ export default function RiskPredictor() {
 
             </div>
 
+            {/* Additional ML features */}
+            <div className="mt-7 border-t border-white/10 pt-6">
+              <p className="mb-4 text-sm font-semibold text-white">Additional ML features</p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-2 block text-sm text-white/70">Latitude</label>
+                  <input type="number" step="0.0001" value={latitude}
+                    onChange={(e) => setLatitude(Number(e.target.value))}
+                    className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none focus:border-emerald-400/50" />
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm text-white/70">Longitude</label>
+                  <input type="number" step="0.0001" value={longitude}
+                    onChange={(e) => setLongitude(Number(e.target.value))}
+                    className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none focus:border-emerald-400/50" />
+                </div>
+              </div>
+              <div className="mt-5">
+                <div className="mb-2 flex justify-between text-sm text-white/70">
+                  <label>Vegetation Moisture</label>
+                  <span className="font-semibold text-emerald-400">{vegetationMoisture}%</span>
+                </div>
+                <input type="range" min="0" max="100" value={vegetationMoisture}
+                  onChange={(e) => setVegetationMoisture(Number(e.target.value))}
+                  className="w-full accent-emerald-400" />
+              </div>
+              <p className="mt-2 text-xs text-white/35">
+                These additional fields are used by the ML models. The original JavaScript scoring logic is unchanged.
+              </p>
+            </div>
+
             {/* Analyze button */}
             <button
               onClick={calculateRisk}
@@ -537,6 +572,20 @@ export default function RiskPredictor() {
           </div>
 
         </div>
+
+        {/* Independent ML model predictions; existing JS result above is preserved */}
+        <MLModelComparison
+          latitude={latitude}
+          longitude={longitude}
+          temperature={temperature}
+          humidity={humidity}
+          windSpeed={windSpeed}
+          rainfall={rainfall}
+          dryness={dryness}
+          vegetationMoisture={vegetationMoisture}
+          month={month}
+          day={day}
+        />
 
         {/* Disclaimer */}
         <div className="mt-6 flex gap-3 rounded-2xl border border-yellow-400/10 bg-yellow-400/[0.03] p-5">
